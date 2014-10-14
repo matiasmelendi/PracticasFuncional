@@ -25,13 +25,29 @@
    (it "should be false, because a cell of the board have a cross"
       (should-not (board_is_empty (mark_cell 3 :cross create_empty_board)))
        )
-   (it "should return a list of lists containing the rows of the board"
-       (should= 3 (count (rows create_empty_board)))
+
+   (it "should be true, because an empty board not contains winning movements"
+       (should-not (with_winning_movement create_empty_board))
        )
-   (it "Not implemented yet" ;;"should be true, because an empty board not contains winning movements"
-       (should false) ;; (with_winning_movement create_empty_board))
+   (it "should be true, because this board contains a winning movement"
+       (should (with_winning_movement (mark_cell 2 :cross (mark_cell 1 :cross create_empty_board))))
        )
  )
+
+;;Board Lines
+(describe "what's happen when we try to divide the board"
+
+  (it "should return a list of lists containing the rows of the board"
+       (should= 3 (count (rows create_empty_board)))
+       )
+   (it "should return a list of lists containing the columns of the board"
+       (should= 3 (count (columns create_empty_board)))
+       )
+   (it "should return a list of lists containing the cells of diagonal"
+       (should= 1 (count (diagonal create_empty_board)))
+       )
+  )
+
 
 ;;Player
 
@@ -54,7 +70,7 @@
 ;;Movement
 
 (describe "the behaviour of differents kinds of movements"
-  (it "Not implemented yet"
-      (should-not true))
-
+  (it "should be true because is a winning movement"
+      (is_winning_movement (mark_cell 2 :cross (mark_cell 1 :cross {1 empty_cell 2 empty_cell 3 empty_cell})))
           )
+)
