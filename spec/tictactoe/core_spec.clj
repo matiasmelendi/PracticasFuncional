@@ -37,14 +37,14 @@
 ;;Board Lines
 (describe "what's happen when we try to divide the board"
 
-  (it "should return a list of lists containing the rows of the board"
+  (it "should return a list of rows "
        (should= 3 (count (rows create_empty_board)))
        )
-   (it "should return a list of lists containing the columns of the board"
+   (it "should return a list of columns"
        (should= 3 (count (columns create_empty_board)))
        )
-   (it "should return a list of lists containing the cells of diagonal"
-       (should= 1 (count (diagonal create_empty_board)))
+   (it "should return a list containing the cells of diagonal"
+       (should= 2 (count (diagonal create_empty_board)))
        )
   )
 
@@ -70,7 +70,13 @@
 ;;Movement
 
 (describe "the behaviour of differents kinds of movements"
+  (it "should be false because the row not contain a winning movement"
+      (should-not (is_winning_movement {1 empty_cell 2 empty_cell 3 empty_cell}))
+      )
+  (it "should be false because the row not contain a winning movement"
+      (should-not (is_winning_movement (mark_cell 2 :cross {1 empty_cell 2 empty_cell 3 empty_cell})))
+        )
   (it "should be true because is a winning movement"
-      (is_winning_movement (mark_cell 2 :cross (mark_cell 1 :cross {1 empty_cell 2 empty_cell 3 empty_cell})))
+      (should (is_winning_movement (mark_cell 2 :cross (mark_cell 1 :cross {1 empty_cell 2 empty_cell 3 empty_cell}))))
           )
 )
