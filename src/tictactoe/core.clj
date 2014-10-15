@@ -42,9 +42,13 @@
 
 ;;Movement
 
-(defn is_winning_movement [movement] (every? (comp not is_unmarked) (group_by_mark movement)) )
+;;Queda hacer que is_winning_movement filtre al que tiene más cantidad de marcas
+;;y ver que esa marca no sea :unmarked
+(defn XXX [marks] (= 2 ((comp count first) (vals (dissoc marks :unmarked))) ))
 
-            ;;Only remain the case that "some" return nil.
-(defn with_winning_movement [board] (some is_winning_movement (marked_lines board)) )
+(defn is_winning_line [movement] (XXX (group_by_mark (vals (first movement)) )))
+
+
+(defn with_winning_movement [board] (not-every? (comp not is_winning_line) (marked_lines board) ))
 
 
